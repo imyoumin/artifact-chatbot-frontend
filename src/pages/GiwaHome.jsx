@@ -93,7 +93,7 @@ export default function Home() {
 
       <PageIndicator step={step} onDotClick={setStep} />
 
-      {/* ✅ 고정된 버튼 */}
+      {/* 고정된 버튼 */}
       <NextButton onClick={handleNext} label={step < 4 ? '다음' : '유물과 대화해보기'} />
     </Layout>
   );
@@ -209,7 +209,7 @@ const QuestionGuide = styled.p`
   color: #ffffff;
 `;
 
-/* ✅ 하단 고정 버튼 컴포넌트 */
+/* 하단 고정 버튼 컴포넌트 */
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
