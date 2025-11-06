@@ -21,13 +21,16 @@ export default function PageIndicator({ step, onDotClick }) {
 const IndicatorWrapper = styled.div`
   display: flex;
   justify-content: center;
-  position: fixed;   /* 고정 */
-  bottom: 100px;      /* 버튼 위 */
+  align-items: center;
+  position: relative;
+  top: 0;               /* 상단 고정 */
   left: 0;
   right: 0;
   max-width: 420px;
   margin: 0 auto;
   gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  z-index: 100;         /* 다른 요소보다 위 */
 `;
 
 const Dot = styled.div`

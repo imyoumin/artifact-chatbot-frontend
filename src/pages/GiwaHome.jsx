@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import Layout from '../components/Layout'; // 공통 레이아웃 import
+import Layout from '../components/Layout';
+import PageIndicator from '../components/PageIndicator';  // ✅ 공통 인디케이터 import
 import artifactGif from '../assets/artifact.gif';
 import questionIcon from '../assets/question.png';
 
-export default function Home() {
+export default function GiwaHome() {
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
@@ -18,23 +19,11 @@ export default function Home() {
     }
   };
 
-  // 페이지 인디케이터
-  const PageIndicator = ({ step, onDotClick }) => (
-    <IndicatorWrapper>
-      {[1, 2, 3, 4].map((num) => (
-        <Dot
-          key={num}
-          $active={step === num}
-          onClick={() => onDotClick(num)}
-          role="button"
-          aria-label={`Go to step ${num}`}
-        />
-      ))}
-    </IndicatorWrapper>
-  );
-
   return (
     <Layout>
+      {/* 인디케이터 상단 배치 (스크롤 고정 X) */}
+      <PageIndicator step={step} onDotClick={setStep} />
+
       {step === 1 && (
         <>
           <Title>
@@ -91,15 +80,14 @@ export default function Home() {
         </>
       )}
 
-      <PageIndicator step={step} onDotClick={setStep} />
-
-      {/* 고정된 버튼 */}
+      {/* 하단 고정 버튼 */}
       <NextButton onClick={handleNext} label={step < 4 ? '다음' : '유물과 대화해보기'} />
     </Layout>
   );
 }
 
 // ==================== Styled Components ====================
+
 const Title = styled.h1`
   font-size: 35px;
   font-weight: 600;
@@ -143,22 +131,6 @@ const QuestionBox = styled.div`
   font-size: 0.9rem;
   color: #fff;
   text-align: left;
-`;
-
-const IndicatorWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0.5rem 0;
-  gap: 1rem;
-`;
-
-const Dot = styled.div`
-  width: 30px;
-  height: 3px;
-  border-radius: 10px;
-  background-color: ${({ $active }) => ($active ? '#948979' : '#3F4149')};
-  transition: background-color 0.3s;
-  cursor: pointer;
 `;
 
 const NoticeCard = styled.div`
@@ -209,7 +181,6 @@ const QuestionGuide = styled.p`
   color: #ffffff;
 `;
 
-/* 하단 고정 버튼 컴포넌트 */
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -241,7 +212,6 @@ const Button = styled.button`
   }
 `;
 
-/* ✅ 실제 버튼 컴포넌트 */
 function NextButton({ onClick, label }) {
   return (
     <ButtonWrapper>
